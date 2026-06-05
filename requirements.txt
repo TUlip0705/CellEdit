@@ -1,0 +1,8 @@
+diffusers
+huggingface-hub
+numpy
+Pillow
+PyYAML
+torch
+tqdm
+transformers

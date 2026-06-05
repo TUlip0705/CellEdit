@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environments
+.venv/
+venv/
+env/
+.conda/
+
+# Data, checkpoints, generated outputs
+data/
+outputs/
+checkpoints/
+pretrained/
+wandb/
+logs/
+runs/
+samples/
+generated/
+.cache/
+.mplconfig/
+
+# Large scientific arrays / artifacts
+*.npy
+*.npz
+*.h5
+*.hdf5
+*.parquet
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.pkl
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/

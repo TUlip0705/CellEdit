@@ -1,0 +1,62 @@
+# iREPA (RxRx3) with continuous-dose FiLM conditioning.
+
+seed: 123
+device: cuda
+mixed_precision: true
+
+paths:
+  meta_csv: data/rxrx3/meta/metadata.csv
+  rxrx3_root: data/rxrx3/images
+  oph_tokens_dir: data/rxrx3/oph_patchwise
+  kpgt_dir: data/rxrx3/kpgt
+  vae_latents_dir: data/rxrx3/vae_latents
+  output_dir: outputs/rxrx3
+
+data:
+  split: train
+  num_workers: 4
+  batch_size: 8
+  pin_memory: true
+
+cond:
+  kpgt_dim: 2304
+  hidden_dim: 384
+  dose_mode: cont_film
+  dose_fourier_k: 16
+  dose_mlp_dim: 384
+  dose_alpha_init: 0.1
+  cond_drop_prob: 0.1
+  keep_empty_id: true
+
+model:
+  input_size: 64
+  patch_size: 2
+  in_channels: 24
+  hidden_size: 384
+  depth: 12
+  num_heads: 6
+  mlp_ratio: 4.0
+  encoder_depth: 4
+  teacher_dim: 384
+  projector_type: conv
+  conv_kernel: 3
+
+irepa:
+  spnorm: zscore
+  zscore_alpha: 1.0
+  eps: 1.0e-6
+
+loss:
+  flow_weight: 1.0
+  repa_weight: 0.5
+
+optim:
+  lr: 1.0e-4
+  weight_decay: 0.01
+  betas: [0.9, 0.999]
+
+train:
+  max_steps: 200000
+  log_every: 50
+  ckpt_every: 5000
+  eval_every: 5000
